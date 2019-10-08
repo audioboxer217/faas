@@ -4,7 +4,7 @@ set -e
 
 ./deploy_stack.sh --no-auth
 
-docker service update func_gateway --image=openfaas/gateway:latest-dev --update-failure-action=restart
+docker service update func_gateway --image=openfaas/gateway:latest-dev --update-failure-action=continue || docker service ps --no-trunc func_gateway
 
 # Script makes sure OpenFaaS API gateway is ready before running tests
 wait_success=false
